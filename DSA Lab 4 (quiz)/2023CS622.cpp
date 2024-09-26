@@ -75,19 +75,17 @@ class LinkedList{
         if(n>count){
             n=n%count;
         }
-        
+        cout<<"value of n is "<<n<<endl;
       
-        Node* temp2=head;
-        for(int i=1;i<n;i++){
-            temp2=temp2->next;
-        }
-        Node* temp3=temp2->next;
-        
-        temp2->next=nullptr;
-        tail=temp2;
         temp->next=head;
-        head=temp3;
-        temp3->prev=nullptr;
+        temp=head;
+        for(int i=1;i<count-n;i++){
+           temp=temp->next;
+        }
+       head=temp->next;
+        
+       temp->next=nullptr;
+       
         
 
     }
@@ -144,13 +142,22 @@ class LinkedList{
 
 int main(){
     LinkedList l;
-    l.insertAtStart(4);
-    l.insertAtStart(7);
+    l.insertAtStart(11);
+    l.insertAtStart(10);
     l.insertAtStart(9);
+    l.insertAtStart(8);
+    l.insertAtStart(7);
+    l.insertAtStart(6);
+    l.insertAtStart(5);
+    l.insertAtStart(4);
     l.insertAtStart(3);
-    l.rotateByN(0);
+    l.insertAtStart(2);
+    l.insertAtStart(1);
+    
+    l.display();
+    l.rotateByN(6);
     
     
     l.display();
-    cout<<l.findNthFromLast(0);
+   
 }
