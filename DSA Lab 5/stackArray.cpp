@@ -20,7 +20,7 @@ class Stack{
 
     }
     bool isFull(){
-        return top==maxSize;
+        return top+1==maxSize;
 
     }
     bool isEmpty(){
