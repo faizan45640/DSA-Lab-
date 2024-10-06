@@ -1,5 +1,6 @@
 #include<iostream>
 #include<stack>
+#include<algorithm>
 using namespace std;
 
 class Node{
@@ -73,18 +74,20 @@ int getPrec(char i){
         return -1;
     }
 }
+bool isOperator(char i){
+    return (i=='^' || i=='*' || i=='+' || i=='-' || i=='/');
+}
 
-
-
-void infixToPostfix(string s){
+void infixToPrefix(string s){
     string result="";
-   
     Stack st;
-    for(auto i:s){
-        
-        
+   
+    reverse(s.rbegin() , s.rend());
+    for(auto i:s)
+    {
         if(isOperand(i)){
-            result+=i;
+             result+=i;
+            
         }
         else if(i=='('){
             st.push(i);
@@ -96,38 +99,42 @@ void infixToPostfix(string s){
             }
             st.pop();
         }
-        else{
-            while(!st.empty() && st.top() != '(' && (!st.empty() && getPrec(i)>getPrec(st.top())) || (!st.empty() && getPrec(i)==getPrec(st.top()))  ){
+        else if(isOperator(i)) {
+            if(i=='^'){
+                while(!st.empty() && getPrec(i)<=getPrec(st.top())){
+                    result=result+st.top();
+                    st.pop();
+                }
+            }
+            else{
+            while(!st.empty() && getPrec(i)<getPrec(st.top())){
                 result+=st.top();
                 st.pop();
             }
+            }
             st.push(i);
         }
-       
-       
+
+
     }
-     while(!st.empty()){
-            result+=st.top();
-            st.pop();
-        }
-     cout<<result;
-
-
-
-
-}
-
-
-void infixToPrefix(string s){
+    while(!st.empty()){
+        result+=st.top();
+        st.pop();
+    }
     
+    reverse(result.rbegin() , result.rend());
+    cout<<result;
+    
+
 }
+
 
 int main()
 {
     string a;
-    cout<<"Enter a postfix"<<endl;
+    cout<<"Enter a infix"<<endl;
     cin>>a;
-    infixToPostfix(a);
+    infixToPrefix(a);
 	
 	
 	
