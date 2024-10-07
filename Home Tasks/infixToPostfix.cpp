@@ -67,7 +67,7 @@ int getPrec(char i){
         return 2;
     }
     else if(i=='+' || i=='-'){
-        return 3;
+        return 1;
     }
     else{
         return -1;
@@ -96,6 +96,7 @@ void infixToPostfix(string s){
             }
             st.pop();
         }
+        
         else{
             while(!st.empty() && st.top() != '(' && (!st.empty() && getPrec(i)>getPrec(st.top())) || (!st.empty() && getPrec(i)==getPrec(st.top()))  ){
                 result+=st.top();
@@ -119,13 +120,13 @@ void infixToPostfix(string s){
 
 
 void infixToPrefix(string s){
-    
+
 }
 
 int main()
 {
     string a;
-    cout<<"Enter a postfix"<<endl;
+    cout<<"Enter an infix"<<endl;
     cin>>a;
     infixToPostfix(a);
 	

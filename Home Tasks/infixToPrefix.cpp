@@ -1,5 +1,4 @@
 #include<iostream>
-#include<stack>
 #include<algorithm>
 using namespace std;
 
@@ -68,7 +67,7 @@ int getPrec(char i){
         return 2;
     }
     else if(i=='+' || i=='-'){
-        return 3;
+        return 1;
     }
     else{
         return -1;
@@ -81,7 +80,16 @@ bool isOperator(char i){
 void infixToPrefix(string s){
     string result="";
     Stack st;
-   
+    
+    for(auto &i : s){
+        if(i=='('){
+            i=')';
+            
+        }
+        else if(i==')'){
+            i='(';
+        }
+    }
     reverse(s.rbegin() , s.rend());
     for(auto i:s)
     {
